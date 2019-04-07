@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete User (Check)</title>
+</head>
+<body>
+    <h1> Notice: you must be one of the administrators in order to delete a user  </h1>
+
+    <p> Please enter your user ID </p>
+    <textarea id="admin_id" rows="1" cols="10"></textarea>
+    <button onclick="myFunction()">Click me</button>
+
+    <p id="status"></p>
+    <script>
+        function myFunction() {
+            var data = "admin_id=" + document.getElementById("admin_id").value;
+            document.getElementById("admin_id").value = "";
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log(this.responseText);
+                    if (this.responseText === "OK") {
+						window.location.href = 'DeleteAUser.html';      // redirect to another page
+                    }
+                    else {
+						document.getElementById("status").innerHTML = this.responseText;
+                    }
+                }
+            });
+
+            xhr.open("DELETE", "/user/check");
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "ecd6042f-c45c-478f-aa82-146ae5c954c7");
+
+            xhr.send(data);
+        }
+
+    </script>
+
+</body>
+
+</html>

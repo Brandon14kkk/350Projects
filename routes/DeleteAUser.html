@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete User</title>
+</head>
+<body onload="loadUsers()">
+    <h1> You are a super user, you can delete a user from here  </h1>
+    <h2> Here are all the users in the system </h2>
+    <p id="user_list"></p>
+
+
+    <p> Please enter ID of the user to be deleted </p>
+    <textarea id="delete_id" rows="1" cols="10"></textarea>
+    <button onclick="myFunction()">Click me</button>
+
+    <p id="status"></p>
+
+    <script>
+        function myFunction() {
+			var data = "delete_id=" + document.getElementById("delete_id").value + "&undefined=";
+			document.getElementById("delete_id").value = "";
+
+			var xhr = new XMLHttpRequest();
+			xhr.withCredentials = true;
+
+			xhr.addEventListener("readystatechange", function () {
+				if (this.readyState === 4) {
+					console.log(this.responseText);
+					document.getElementById("status").innerHTML = this.responseText;
+				}
+			});
+
+			xhr.open("DELETE", "/user/");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.setRequestHeader("cache-control", "no-cache");
+			xhr.setRequestHeader("Postman-Token", "52b9da72-6600-432e-9872-39ffc390eacf");
+
+			xhr.send(data);
+        }
+
+        function loadUsers() {
+            // get the all chatrooms
+            var data = null;
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log("Show all users" + this.responseText);
+                    document.getElementById("user_list").innerHTML = this.responseText;
+                }
+            });
+
+            xhr.open("GET", "/user/");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "9468b173-e1bc-4af1-be14-8ae1d4f25387");
+
+            xhr.send(data);
+        }
+    </script>
+
+
+</body>
+</html>

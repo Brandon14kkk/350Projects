@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Action Page</title>
+    <script>
+        function getName() {
+            return document.getElementById('tableName');
+        }
+    </script>
+</head>
+<body>
+    <h1> This is the page that you can choose an action to do </h1>
+    <p> To create a new chatroom (you may want to check all existing ones first since only UNIQUE name is allowed) </p>
+    <a href="routes/CreatRoom.html"> Create a new chatroom </a>
+
+    <p> To get all existing Chatrooms </p>
+    <a href="/chatrooms"> Show chatrooms </a>
+
+    <p> To delete a chatroom (you may want to check all existing ones first since we can only delete from them)</p>
+    <a href="routes/DeleteRoom.html"> Delete a new chatroom </a>
+
+    <p> To make a post to a chatroom (you may want to check all existing ones)</p>
+    <a href="routes/PostToARoom.html"> Make a post a new chatroom </a>
+
+    <p> To retrieve all posts from a room </p>
+    <a href="routes/GetAllPosts.html"> Get all posts from a chatroom </a>
+
+    <p> To delete a user from the system </p>
+    <a href="routes/DeleteUserCheck.html"> Verify your identity </a>
+
+
+</body>
+</html>

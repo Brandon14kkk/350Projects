@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make A Post</title>
+</head>
+<body onload="loadChatRooms()">
+
+<h2> Existing Rooms </h2>
+<p id="room_list"></p>
+
+<p>Please type the name for you chatroom in the box below, and hit the "Submit" button to </p>
+Please enter the ID the chatroom you want to post <br>
+<textarea id="room_id" rows="1" cols="10"> </textarea> <br>
+
+Please enter you user ID to make a post <br>
+<textarea id="user_id" rows="1" cols="10"> </textarea> <br>
+
+Please enter the content you want to post <br>
+<textarea id="content" rows="3" cols="30"> </textarea> <br>
+
+<button onclick="myFunction()">Click me</button>
+
+<P id="status"></P>
+
+<script>
+    function myFunction() {
+        // get the content to be sent
+        const data = "room_id=" + document.getElementById("room_id").value + "&"
+            + "user_id=" + document.getElementById("user_id").value + "&"
+            + "content=" + document.getElementById("content").value + "&undefined=";
+
+        document.getElementById("room_id").value = "";
+        document.getElementById("user_id").value = "";
+        document.getElementById("content").value = "";
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
+                document.getElementById("status").innerHTML = this.responseText;
+            }
+        });
+
+        xhr.open("POST", "/chatrooms/makePost");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("cache-control", "no-cache");
+        xhr.setRequestHeader("Postman-Token", "2c76aa1d-2c07-4f2f-9462-d3c44b5ea60c");
+
+        xhr.send(data);
+    }
+
+
+    function loadChatRooms() {
+        // get the all chatrooms
+        var data = null;
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log("Hello !!!" + this.responseText);
+                document.getElementById("room_list").innerHTML = this.responseText;
+            }
+        });
+
+        xhr.open("GET", "/chatrooms");
+        xhr.setRequestHeader("cache-control", "no-cache");
+        xhr.setRequestHeader("Postman-Token", "9468b173-e1bc-4af1-be14-8ae1d4f25387");
+
+        xhr.send(data);
+    }
+
+</script>
+
+</body>
+</html>

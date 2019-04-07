@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a room</title>
+</head>
+<body>
+
+<h1>You are coming to the page that you can create a new chatroom!</h1>
+
+<p>Please type the name for you chatroom in the box below, and hit the "Submit" button to </p>
+
+Please enter the name of the chatroom you want to create <br>
+<textarea id="room_name" rows="1" cols="10"> </textarea>
+
+<button onclick="myFunction()">Click me</button>
+
+<script>
+    function myFunction() {
+        var data = "name=" + document.getElementById("room_name").value + "&undefined=";
+        document.getElementById("room_name").value = "";
+
+        var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                console.log(this.responseText);
+            }
+        });
+
+        xhr.open("POST", "/chatrooms/");
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("cache-control", "no-cache");
+
+        xhr.send(data);
+    }
+</script>
+
+</body>
+</html>
+

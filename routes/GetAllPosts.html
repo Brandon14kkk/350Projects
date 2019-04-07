@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One room posts</title>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>Posts to one room</title>
+</head>
+<body onload="loadChatRooms()">
+    <p> Please type the id of the chatroom in the box below, and hit the "Submit" button to submit </p>
+
+    <h2> Room List </h2>
+    <p id="room list"></p>
+
+    <textarea id="room_id" rows="1" cols="10"> </textarea>
+
+    <button onclick="myFunction()">Click me</button>
+    <script>
+        function myFunction() {
+            // get the chatroom name
+            const roomID = document.getElementById("room_id").value;
+            document.getElementById("room_id").value = "";
+            const posts_url = "/chatrooms/" + roomID;
+            window.open(posts_url, "_self");
+        }
+
+        function loadChatRooms() {
+            // get the all chatrooms
+            var data = null;
+
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === 4) {
+                    console.log("Hello !!!" + this.responseText);
+                    document.getElementById("room list").innerHTML = this.responseText;
+                }
+            });
+
+            xhr.open("GET", "/chatrooms");
+            xhr.setRequestHeader("cache-control", "no-cache");
+            xhr.setRequestHeader("Postman-Token", "9468b173-e1bc-4af1-be14-8ae1d4f25387");
+
+            xhr.send(data);
+        }
+
+    </script>
+</body>
+</html>

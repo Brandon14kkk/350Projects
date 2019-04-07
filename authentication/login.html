@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page to verify the identity of the user</title>
+</head>
+<body>
+    <h2>This form will be used to verify whether the user can use chatroom services</h2>
+    <br>
+    <p>We will send you back to the home page if you cannot past our authentication check</p>
+
+    <form action="/auth" method="POST">
+        Please enter you verification message:<br>
+        <input type="email" name="Email" placeholder="Enter your email address"> <br>
+        <input type="password" name="Password" placeholder="Enter your password here"> <br>
+        <input type="submit" value="Submit">
+    </form>
+
+</body>
+</html>
+
